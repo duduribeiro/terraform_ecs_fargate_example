@@ -25,3 +25,15 @@ module "networking" {
   availability_zones   = "${local.production_availability_zones}"
   key_name             = "production_key"
 }
+
+module "rds" {
+  source            = "./modules/rds"
+  environment       = "production"
+  allocated_storage = "20"
+  database_name     = "${var.production_database_name}"
+  database_username = "${var.production_database_username}"
+  database_password = "${var.production_database_password}"
+  subnet_ids        = ["${module.networking.private_subnets_id}"]
+  vpc_id            = "${module.networking.vpc_id}"
+  instance_class    = "db.t2.micro"
+}
