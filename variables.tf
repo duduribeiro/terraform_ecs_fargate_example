@@ -21,3 +21,7 @@ variable "production_database_password" {
 variable "production_secret_key_base" {
   description = "The Rails secret key for production"
 }
+
+variable "domain" {
+  default = "The domain of your application"
+}
