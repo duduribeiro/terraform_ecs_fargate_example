@@ -233,6 +233,7 @@ resource "aws_security_group" "ecs_service" {
 /* Simply specify the family to find the latest ACTIVE revision in that family */
 data "aws_ecs_task_definition" "web" {
   task_definition = "${aws_ecs_task_definition.web.family}"
+  depends_on = [ "aws_ecs_task_definition.web" ]
 }
 
 resource "aws_ecs_service" "web" {
